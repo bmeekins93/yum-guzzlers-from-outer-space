@@ -1,19 +1,235 @@
 {
+  "project": "Yum Guzzlers From Outer Space",
+  "version": "0.1.0",
+  "updated": "2025-10-30T04:30:44Z",
+  "owner": "Brian",
+  "links": {
+    "readme": "README.md"
+  },
+  "definitions": {
+    "labels": {
+      "code": "Gameplay/engineering task",
+      "art": "Art/sprites/animation task",
+      "audio": "Music/SFX task",
+      "design": "Game design task",
+      "docs": "Documentation/task",
+      "qa": "Testing and QA",
+      "perf": "Performance/optimization",
+      "deploy": "Builds/hosting"
+    },
+    "statuses": [
+      "todo",
+      "in_progress",
+      "blocked",
+      "review",
+      "done"
+    ]
+  },
   "stages": [
     {
       "id": "S0-setup",
-      "title": "Repository & Boilerplate",
+      "name": "Repository & Boilerplate",
+      "milestone": "M0",
+      "status": "done",
+      "dependencies": [],
+      "acceptance": [
+        "Repo exists with README.md and roadmap.json at root",
+        "Basic Phaser boot with black screen renders at 1280x720",
+        "Local dev server instruction verified"
+      ],
       "tasks": [
-        {"id":"T0.1","title":"Create repo structure (assets/src root, index.html, styles.css)","status":"done"},
-        {"id":"T0.2","title":"Add Phaser 3 via CDN and boot minimal black screen at 1280x720","status":"done"},
-        {"id":"T0.3","title":"Commit README + roadmap","status":"done"}
+        {
+          "id": "T0.1",
+          "desc": "Create repo structure (assets/src root, index.html, styles.css).",
+          "labels": [
+            "docs",
+            "deploy"
+          ],
+          "status": "done",
+          "estimate_hours": 1
+        },
+        {
+          "id": "T0.2",
+          "desc": "Add Phaser 3 via CDN or local module and boot minimal config.",
+          "labels": [
+            "code"
+          ],
+          "status": "done",
+          "estimate_hours": 1
+        },
+        {
+          "id": "T0.3",
+          "desc": "Commit README.md and roadmap.json.",
+          "labels": [
+            "docs"
+          ],
+          "status": "done",
+          "estimate_hours": 0.5
+        }
       ]
     },
     {
-      "id":"S1",
-      "title":"Core Loop MVP",
-      "tasks":[
-        {"id":"T1.1","title":"Scene framework (Boot, Preload, Menu, Level, HUD, Pause, GameOver)","status":"todo"}
+      "id": "S1-core-loop",
+      "name": "Core Loop MVP",
+      "milestone": "M1",
+      "status": "todo",
+      "dependencies": [
+        "S0-setup"
+      ],
+      "acceptance": [
+        "MainMenu → Level loads",
+        "Player can run/jump (coyote & buffer) and shoot pooled bullets",
+        "Yum meter drains on fire; pickups refill; low-Yum sputter",
+        "HUD shows health/yum/score/timer",
+        "Start, Pause, GameOver screens functional",
+        "Single simple level completable with Grunt enemy"
+      ],
+      "tasks": [
+        {
+          "id": "T1.1",
+          "desc": "Implement Scene framework (Boot, Preload, Menu, Level, HUD, Pause, GameOver).",
+          "labels": [
+            "code",
+            "design"
+          ],
+          "status": "todo",
+          "estimate_hours": 4
+        },
+        {
+          "id": "T1.2",
+          "desc": "Player controller w/ coyote time and jump buffer.",
+          "labels": [
+            "code",
+            "design"
+          ],
+          "status": "todo",
+          "estimate_hours": 3
+        },
+        {
+          "id": "T1.3",
+          "desc": "Cannon + projectile pooling + collisions.",
+          "labels": [
+            "code"
+          ],
+          "status": "todo",
+          "estimate_hours": 3
+        },
+        {
+          "id": "T1.4",
+          "desc": "Yum resource system + HUD bar.",
+          "labels": [
+            "code",
+            "design"
+          ],
+          "status": "todo",
+          "estimate_hours": 2
+        },
+        {
+          "id": "T1.5",
+          "desc": "Enemy: Grunt (patrol, 1 HP).",
+          "labels": [
+            "code",
+            "design"
+          ],
+          "status": "todo",
+          "estimate_hours": 2
+        },
+        {
+          "id": "T1.6",
+          "desc": "Simple Level 1 (placeholder tiles) + exit gate.",
+          "labels": [
+            "code",
+            "design"
+          ],
+          "status": "todo",
+          "estimate_hours": 2
+        },
+        {
+          "id": "T1.7",
+          "desc": "HUD (hearts, yum bar, score, timer).",
+          "labels": [
+            "code",
+            "design"
+          ],
+          "status": "todo",
+          "estimate_hours": 2
+        },
+        {
+          "id": "T1.8",
+          "desc": "Start/Pause/GameOver screens.",
+          "labels": [
+            "code",
+            "design"
+          ],
+          "status": "todo",
+          "estimate_hours": 2
+        }
+      ]
+    },
+    {
+      "id": "S2-content",
+      "name": "Content Expansion",
+      "milestone": "M2",
+      "status": "todo",
+      "dependencies": [
+        "S1-core-loop"
+      ],
+      "acceptance": [
+        "L1 polished; L2 and L3 implemented",
+        "Enemies Hopper, Spitter, Tanker implemented",
+        "Parallax background (3 star layers)",
+        "Pickups (Yum small, Big Yum, Shield, Speed) spawn and function"
+      ],
+      "tasks": [
+        {
+          "id": "T2.1",
+          "desc": "Implement Hopper (jumping) and Spitter (ranged).",
+          "labels": [
+            "code"
+          ],
+          "status": "todo",
+          "estimate_hours": 4
+        },
+        {
+          "id": "T2.2",
+          "desc": "Implement Tanker (armored front, weak back).",
+          "labels": [
+            "code",
+            "design"
+          ],
+          "status": "todo",
+          "estimate_hours": 3
+        },
+        {
+          "id": "T2.3",
+          "desc": "Parallax starfield and camera dead-zone tuning.",
+          "labels": [
+            "code",
+            "design"
+          ],
+          "status": "todo",
+          "estimate_hours": 2
+        },
+        {
+          "id": "T2.4",
+          "desc": "Pickups system (Yum Cell, Big Yum, Shield, Speed).",
+          "labels": [
+            "code",
+            "design"
+          ],
+          "status": "todo",
+          "estimate_hours": 3
+        },
+        {
+          "id": "T2.5",
+          "desc": "Design and build Level 2 and Level 3 JSON maps.",
+          "labels": [
+            "design",
+            "code"
+          ],
+          "status": "todo",
+          "estimate_hours": 6
+        }
       ]
     }
   ]
