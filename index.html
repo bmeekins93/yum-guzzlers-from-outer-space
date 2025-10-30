@@ -1,13 +1,22 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Yum Guzzlers From Outer Space</title>
-  <link rel="stylesheet" href="styles.css" />
-  <script src="https://cdn.jsdelivr.net/npm/phaser@3/dist/phaser.js"></script>
-</head>
-<body>
-  <script src="src/main.js"></script>
-</body>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Yum Guzzlers From Outer Space — S1 Core Loop Scaffold</title>
+    <style>
+      html, body { height: 100%; margin: 0; background: #0f1020; color: #e5e7eb; }
+      #game { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
+      .footer { position: fixed; bottom: 6px; right: 10px; font: 12px/1.2 system-ui, sans-serif; opacity: 0.7;}
+      a { color: #93c5fd; }
+      .tip { position: fixed; top: 8px; left: 10px; font: 12px/1.2 system-ui, sans-serif; opacity: 0.7;}
+    </style>
+  </head>
+  <body>
+    <div id="game"></div>
+    <div class="tip">Hotkeys: <b>Enter</b>=Start, <b>Esc</b>=Pause/Resume, <b>G</b>=Game Over, <b>M</b>=Menu</div>
+    <div class="footer">Phaser loaded from CDN for dev convenience.</div>
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3/dist/phaser.min.js"></script>
+    <script type="module" src="./src/main.js"></script>
+  </body>
 </html>
