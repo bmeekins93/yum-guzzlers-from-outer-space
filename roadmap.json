@@ -1,0 +1,20 @@
+{
+  "stages": [
+    {
+      "id": "S0-setup",
+      "title": "Repository & Boilerplate",
+      "tasks": [
+        {"id":"T0.1","title":"Create repo structure (assets/src root, index.html, styles.css)","status":"done"},
+        {"id":"T0.2","title":"Add Phaser 3 via CDN and boot minimal black screen at 1280x720","status":"done"},
+        {"id":"T0.3","title":"Commit README + roadmap","status":"done"}
+      ]
+    },
+    {
+      "id":"S1",
+      "title":"Core Loop MVP",
+      "tasks":[
+        {"id":"T1.1","title":"Scene framework (Boot, Preload, Menu, Level, HUD, Pause, GameOver)","status":"todo"}
+      ]
+    }
+  ]
+}
