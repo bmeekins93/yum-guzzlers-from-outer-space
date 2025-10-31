@@ -1,4 +1,6 @@
 // src/scenes/LevelScene.js
+import Player from '../objects/Player.js';
+
 export default class LevelScene extends Phaser.Scene {
   constructor() {
     super('Level');
@@ -16,28 +18,29 @@ export default class LevelScene extends Phaser.Scene {
     this.platforms.create(width * 0.25, groundY - 100, 'platform').refreshBody();
     this.platforms.create(width * 0.55, groundY - 160, 'platform').refreshBody();
     this.platforms.create(width * 0.80, groundY - 120, 'platform').refreshBody();
-    this.player = this.physics.add.sprite(96, groundY - 100, 'player');
-    this.player.setCollideWorldBounds(true);
+
+    // Player
+    this.player = new Player(this, 96, groundY - 100);
     this.physics.add.collider(this.player, this.platforms);
-    this.cursors = this.input.keyboard.createCursorKeys();
-    this.keys = this.input.keyboard.addKeys('W,A,S,D,ESC,P,G,M');
+
+    // Camera follow
+    this.cameras.main.startFollow(this.player, true, 0.12, 0.12, 0, 40);
+
+    // Non-movement hotkeys
+    this.keys = this.input.keyboard.addKeys('ESC,P,G,M');
+
+    // HUD timer
     this.timeEvent = this.time.addEvent({
-      delay: 1000,
-      loop: true,
-      callback: () => {
-        this.hud.time += 1;
-        this.emitHud();
-      }
+      delay: 1000, loop: true,
+      callback: () => { this.hud.time += 1; this.emitHud(); }
     });
-    if (!this.scene.isActive('HUD')) {
-      this.scene.launch('HUD');
-    }
+
+    if (!this.scene.isActive('HUD')) this.scene.launch('HUD');
     this.emitHud();
+
     const openPause = () => {
       if (!this.scene.isActive('Pause')) {
-        this.scene.launch('Pause');
-        this.scene.pause();
-        this.scene.pause('HUD');
+        this.scene.launch('Pause'); this.scene.pause(); this.scene.pause('HUD');
       }
     };
     this.input.keyboard.on('keydown-ESC', openPause);
@@ -45,29 +48,13 @@ export default class LevelScene extends Phaser.Scene {
     this.input.keyboard.on('keydown-G', () => this.goGameOver());
     this.input.keyboard.on('keydown-M', () => this.toMenu());
   }
-  emitHud() {
-    this.events.emit('hud:update', { ...this.hud });
-  }
-  toMenu() {
-    this.timeEvent?.remove();
-    this.scene.stop('HUD');
-    this.scene.start('MainMenu');
-  }
+  emitHud() { this.events.emit('hud:update', { ...this.hud }); }
+  toMenu() { this.timeEvent?.remove(); this.scene.stop('HUD'); this.scene.start('MainMenu'); }
   goGameOver() {
-    this.timeEvent?.remove();
-    this.scene.stop('HUD');
+    this.timeEvent?.remove(); this.scene.stop('HUD');
     this.scene.start('GameOver', { score: this.hud.score, time: this.hud.time });
   }
   update() {
-    const onGround = this.player.body?.blocked.down;
-    const left = this.cursors.left.isDown || this.keys.A.isDown;
-    const right = this.cursors.right.isDown || this.keys.D.isDown;
-    const up = this.cursors.up.isDown || this.keys.W.isDown;
-    const speed = 180;
-    const jumpSpeed = -420;
-    if (left) this.player.setVelocityX(-speed);
-    else if (right) this.player.setVelocityX(speed);
-    else this.player.setVelocityX(0);
-    if (up && onGround) this.player.setVelocityY(jumpSpeed);
+    // Player handles its own movement in preUpdate.
   }
 }
